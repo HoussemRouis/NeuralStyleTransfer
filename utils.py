@@ -5,7 +5,31 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras.applications import vgg19
 
+from argparse import ArgumentParser
 
+"""
+@ Util function to parse command line
+"""
+def build_parser():
+    parser = ArgumentParser()
+    parser.add_argument('--content',
+            dest='content', help='content image',
+            metavar='CONTENT', required=True)
+    parser.add_argument('--styles',
+            dest='style',
+            nargs='+', help='style image',
+            metavar='STYLE', required=True)
+    parser.add_argument('--output',
+            dest='output', help='output path',
+            metavar='OUTPUT', required=True)
+    parser.add_argument('--iterations', type=int,
+            dest='iterations', help='number of iterations',
+            metavar='ITERATIONS', default=200)
+    parser.add_argument('--width', type=int,
+            dest='width', help='output width',
+            metavar='WIDTH', default=800)
+    return parser
+	
 """
 @ Util function to load, resize and prepare picture into approprite tensor for VGG-19 network
 """

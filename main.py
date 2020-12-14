@@ -1,15 +1,18 @@
 # -*- coding: utf-8 -*-
 
 from functions import *
-import sys
 
 
-content_path = sys.argv[1]
-style_path = sys.argv[2]
-result_prefix = sys.argv[3]
+# Parsing command line
+parser = build_parser()
+options = parser.parse_args()
 
-img_nrows = 800
-iterations = 4000
+# Setting parameters
+content_path = options.content
+style_path = options.style
+result_prefix = options.output
+img_nrows = options.width
+iterations = options.iterations
 
 # Dimensions of the generated picture.
 width, height = keras.preprocessing.image.load_img(content_path).size
